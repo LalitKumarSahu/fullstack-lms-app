@@ -28,6 +28,7 @@ const Courses = () => {
 
 export default Courses;
 
+// if isloading will be true then open this otherwise course display
 const CourseSkeleton = () => {
   return (
     <div className="bg-white shadow-md hover:shadow-lg transition-shadow rounded-lg overflow-hidden">

@@ -1,4 +1,4 @@
-// McgPr7oX7v1mMcbN
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -20,12 +20,16 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
+// sadcnui - tabs(input, label, card)  install
 const Login = () => {
+  // to get signup input value make statevariabel
   const [signupInput, setSignupInput] = useState({
     name: "",
     email: "",
     password: "",
   });
+
+  // to get login input value make statevariabel
   const [loginInput, setLoginInput] = useState({ email: "", password: "" });
 
   const [
@@ -48,21 +52,28 @@ const Login = () => {
   ] = useLoginUserMutation();
   const navigate = useNavigate();
 
+  // to get inputhandler value
   const changeInputHandler = (e, type) => {
     const { name, value } = e.target;
+
+    //if signup hai to we will set in signup
     if (type === "signup") {
       setSignupInput({ ...signupInput, [name]: value });
+
+      // else we will set in login
     } else {
       setLoginInput({ ...loginInput, [name]: value });
     }
   };
-
+ 
+  //ispe click fcn she hme signup & login ka data mil jayega
   const handleRegistration = async (type) => {
     const inputData = type === "signup" ? signupInput : loginInput;
     const action = type === "signup" ? registerUser : loginUser;
     await action(inputData);
   };
 
+  // sadcnui - sonner -> main.jsx (Toaster)
   useEffect(() => {
     if(registerIsSuccess && registerData){
       toast.success(registerData.message || "Signup successful.")
@@ -93,6 +104,7 @@ const Login = () => {
           <TabsTrigger value="signup">Signup</TabsTrigger>
           <TabsTrigger value="login">Login</TabsTrigger>
         </TabsList>
+        {/* value will match signup then open this */}
         <TabsContent value="signup">
           <Card>
             <CardHeader>
@@ -109,7 +121,7 @@ const Login = () => {
                   name="name"
                   value={signupInput.name}
                   onChange={(e) => changeInputHandler(e, "signup")}
-                  placeholder="Eg. patel"
+                  placeholder="Eg. Lalit"
                   required="true"
                 />
               </div>
@@ -120,7 +132,7 @@ const Login = () => {
                   name="email"
                   value={signupInput.email}
                   onChange={(e) => changeInputHandler(e, "signup")}
-                  placeholder="Eg. patel@gmail.com"
+                  placeholder="Eg. Lalit@gmail.com"
                   required="true"
                 />
               </div>
@@ -153,6 +165,9 @@ const Login = () => {
             </CardFooter>
           </Card>
         </TabsContent>
+
+        {/* value will match login then open this */}
+
         <TabsContent value="login">
           <Card>
             <CardHeader>
@@ -169,7 +184,7 @@ const Login = () => {
                   name="email"
                   value={loginInput.email}
                   onChange={(e) => changeInputHandler(e, "login")}
-                  placeholder="Eg. patel@gmail.com"
+                  placeholder="Eg. lalit@gmail.com"
                   required="true"
                 />
               </div>
